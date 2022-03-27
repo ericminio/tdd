@@ -8,6 +8,7 @@
         "choose test type",
         "go to red",
         "investigate surprises",
+        "big bang?",
         "time check",
         "improve error message",
         "revert?",
@@ -18,8 +19,8 @@
     "code": [
         "time check",
         "go to green",
-        "magic number!",
-        "duplication!",
+        "fast!",
+        "faster!",
         "time check",
         "revert?",
         "commit"
@@ -32,6 +33,7 @@
         "primitive obsession?",
         "comments?",
         "bad name?",
+        "conditional?",
         "other smells?",
         "time check",
         "revert?",
