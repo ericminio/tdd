@@ -8,10 +8,10 @@
         "control check",
         "choose test type",
         "go to red",
-        "time check",
-        "surprises?",
-        "big bang?",
         "improve red message",
+        "investigate surprises",
+        "time check",
+        "big bang?",
         "revert?",
         "back to refactor?",
         "commit?"
