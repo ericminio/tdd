@@ -3,6 +3,7 @@
         "start the clock",
         "git clean?",
         "intention check",
+        "branch?",
         "identify sut",
         "control check",
         "choose test type",
@@ -13,7 +14,6 @@
         "big bang?",
         "revert?",
         "back to refactor?",
-        "branch?",
         "commit?"
     ],
     "code": [
