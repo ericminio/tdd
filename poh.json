@@ -1,8 +1,8 @@
 {
     "test": [
         "start the clock",
-        "git clean?",
         "intention check",
+        "git clean?",
         "branch?",
         "identify sut",
         "control check",
