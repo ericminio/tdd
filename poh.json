@@ -2,11 +2,11 @@
     "test": [
         "start the clock",
         "intention check",
-        "git clean?",
-        "branch?",
         "identify sut",
         "control check",
         "choose test type",
+        "git pull",
+        "branch?",
         "go to red",
         "investigate surprises",
         "improve red message",
