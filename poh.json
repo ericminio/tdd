@@ -8,10 +8,10 @@
         "control check",
         "choose test type",
         "go to red",
-        "big bang?",
-        "investigate surprises",
-        "improve error message",
         "time check",
+        "surprises?",
+        "big bang?",
+        "improve error message",
         "revert?",
         "back to refactor?",
         "commit?"
@@ -19,8 +19,6 @@
     "code": [
         "start the clock",
         "go to green",
-        "fast!",
-        "faster!",
         "time check",
         "revert?",
         "commit?"
