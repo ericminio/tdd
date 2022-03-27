@@ -1,5 +1,6 @@
 {
     "test": [
+        "git clean?",
         "time check",
         "intention check",
         "identify sut",
