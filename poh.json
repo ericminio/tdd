@@ -1,32 +1,32 @@
 {
     "test": [
+        "start the clock",
         "git clean?",
-        "time check",
         "intention check",
         "identify sut",
         "control check",
         "choose test type",
         "go to red",
         "investigate surprises",
-        "big bang?",
-        "time check",
         "improve error message",
+        "time check",
+        "big bang?",
         "revert?",
         "back to refactor?",
         "branch?",
-        "commit"
+        "commit?"
     ],
     "code": [
-        "time check",
+        "start the clock",
         "go to green",
         "fast!",
         "faster!",
         "time check",
         "revert?",
-        "commit"
+        "commit?"
     ],
     "refactor": [
-        "time check",
+        "start the clock",
         "control check",
         "magic number?",
         "duplication?",
@@ -37,7 +37,7 @@
         "other smells?",
         "time check",
         "revert?",
-        "commit",
+        "commit?",
         "afraid?"
     ]
 }
