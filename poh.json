@@ -4,7 +4,7 @@
         "git clean?",
         "intention check",
         "branch?",
-        "sut?",
+        "identify sut",
         "control check",
         "choose test type",
         "go to red",
