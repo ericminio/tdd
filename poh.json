@@ -1,0 +1,37 @@
+{
+    "test": [
+        "time check",
+        "intention check",
+        "identify sut",
+        "control check",
+        "choose test type",
+        "go to red",
+        "time check",
+        "revert?",
+        "back to refactor?",
+        "branch?",
+        "commit"
+    ],
+    "code": [
+        "time check",
+        "go to green",
+        "magic number!",
+        "duplication!",
+        "time check",
+        "revert?",
+        "commit"
+    ],
+    "refactor": [
+        "time check",
+        "control check",
+        "magic number?",
+        "duplication?",
+        "primitive obsession?",
+        "comments?",
+        "other smells?",
+        "time check",
+        "revert?",
+        "commit",
+        "afraid?"
+    ]
+}
