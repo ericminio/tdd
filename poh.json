@@ -19,6 +19,7 @@
     "code": [
         "start the clock",
         "go to green",
+        "control check",
         "time check",
         "revert?",
         "commit?"
