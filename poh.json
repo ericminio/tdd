@@ -33,11 +33,13 @@
         "bad name?",
         "inappropriate intimacy?",
         "conditional?",
+        "dead code?",
         "comments?",
         "other code smells?",
         "time check",
         "revert?",
         "commit?",
+        "glad?",
         "afraid?"
     ]
 }
