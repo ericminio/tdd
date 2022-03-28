@@ -36,6 +36,7 @@
         "dead code?",
         "comments?",
         "other code smells?",
+        "solid",
         "time check",
         "revert?",
         "commit?",
