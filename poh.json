@@ -1,6 +1,6 @@
 {
     "test": [
-        "git pull",
+        "pull?",
         "start the clock",
         "intention check",
         "branch?",
