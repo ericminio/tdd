@@ -9,23 +9,26 @@
                 --color-test: rgb(216, 30, 30);
                 --color-code: rgb(0, 165, 0);
                 --color-refactor: rgb(0, 103, 205);
+
+                --val-test: 360;
+                --val-code: 0;
+                --val-refactor: 0;
             }
             .hints {
                 border-radius: 15px;
-                margin-top: 15px;
-                margin-bottom: 15px;
                 border-width: 5px;
             }
 
             .pie {
                 background: conic-gradient( 
-                    var(--color-test) 45deg, 
-                    var(--color-code) 45deg 110deg, 
-                    var(--color-refactor) 110deg
+                    var(--color-test) calc(var(--val-test) * 1deg), 
+                    var(--color-code) calc(var(--val-test) * 1deg) calc((var(--val-test) + var(--val-code)) * 1deg), 
+                    var(--color-refactor) calc((360 - var(--val-refactor)) * 1deg)
                 );
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
+                display: inline-block;
             }
         </style>
         <script src="./poh.js"></script>
@@ -43,25 +46,53 @@
                 const element = document.getElementById(target);
                 element.innerHTML = hints[step];
                 element.style.border = `var(--color-${step}) solid`;
+            };
+        </script>
+        <script>
+            var times = { test:0, code:0, refactor: 0 };
+            var counting = 'test';
+            const nowCounting = (step) => {
+                counting = step;
+            };
+            const tick = () => {
+                times[counting] ++;
+                times.ptest = times.test / (times.test + times.code + times.refactor);
+                times.pcode = times.code / (times.test + times.code + times.refactor);
+                times.prefactor = times.refactor / (times.test + times.code + times.refactor);
+                renderTimes(times);
+                setTimeout(tick, 1000);
             }
+            const renderTimes = (times) => {
+                var root = document.querySelector(':root');
+                root.style.setProperty('--val-test', 360 * times.ptest)
+                root.style.setProperty('--val-code', 360 * times.pcode)
+                root.style.setProperty('--val-refactor', 360 * times.prefactor)
+            }
+            setTimeout(tick, 1000);
         </script>
     </head>
     <body>
         <input type="radio" name="step" id="test" value="test" checked 
-            onclick="displayHints('test', document, 'hints');">
+            onclick="displayHints('test', document, 'hints'); nowCounting('test');">
         <label for="test">test</label>
 
         <input type="radio" name="step" id="code" value="code"
-            onclick="displayHints('code', document, 'hints');">
+            onclick="displayHints('code', document, 'hints'); nowCounting('code');">
         <label for="code">code</label>
 
         <input type="radio" name="step" id="refactor" value="refactor"
-            onclick="displayHints('refactor', document, 'hints');">
+            onclick="displayHints('refactor', document, 'hints'); nowCounting('refactor');">
         <label for="refactor">refactor</label>
 
-        <div class="hints" id="hints"></div>
-
-        <div class="pie"></div>
+        <table width="100%">
+            <tr>
+                <td><div class="hints" id="hints"></div></td>
+                <td style="text-align: center; vertical-align: text-top;">
+                    <div id="pie", class="pie"></div>
+                    <div id="times"></div>
+                </td>
+            </tr>
+        </table>
 
         <script>
             document.getElementById('test').click();
