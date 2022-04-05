@@ -1,109 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            :root {
-                font-family: Helvetica, sans-serif;
-                --color-test: rgb(216, 30, 30);
-                --color-code: rgb(0, 165, 0);
-                --color-refactor: rgb(0, 103, 205);
 
-                --val-test: 360;
-                --val-code: 0;
-                --val-refactor: 0;
-            }
-            li {
-                white-space: nowrap;
-            }
-            .hints {
-                border-radius: 15px;
-                border-width: 5px;
-                display: block;
-                padding-right: 5px;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            font-family: Helvetica, sans-serif;
+            --color-test: rgb(216, 30, 30);
+            --color-code: rgb(0, 165, 0);
+            --color-refactor: rgb(0, 103, 205);
 
-            .pie {
-                background: conic-gradient( 
-                    var(--color-test) calc(var(--val-test) * 1deg), 
-                    var(--color-code) calc(var(--val-test) * 1deg) calc((var(--val-test) + var(--val-code)) * 1deg), 
-                    var(--color-refactor) calc((360 - var(--val-refactor)) * 1deg)
-                );
-                width: 25vw;
-                height: 25vw;
-                border-radius: 50%;
-                display: inline-block;
-            }
-        </style>
-        <script src="./poh.js"></script>
-        <script>
-            const renderHints = (step) =>
-                `<ul>
+            --val-test: 360;
+            --val-code: 0;
+            --val-refactor: 0;
+        }
+
+        li {
+            white-space: nowrap;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .number {
+            text-align: right;
+        }
+
+        .hints {
+            border-radius: 15px;
+            border-width: 5px;
+            display: block;
+            padding-right: 5px;
+        }
+
+        .pie {
+            background: conic-gradient(var(--color-test) calc(var(--val-test) * 1deg),
+                    var(--color-code) calc(var(--val-test) * 1deg) calc((var(--val-test) + var(--val-code)) * 1deg),
+                    var(--color-refactor) calc((360 - var(--val-refactor)) * 1deg));
+            width: 25vw;
+            height: 25vw;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+    <script src="./poh.js"></script>
+    <script>
+        const renderHints = (step) =>
+            `<ul>
                     ${procedures[step].reduce((acc, item) => acc += `<li>${item}</li>`, '')}
                 </ul>`
-            var hints = { 
-                test:renderHints('test'), 
-                code:renderHints('code'), 
-                refactor:renderHints('refactor') 
-            };  
-            const displayHints = (step, document, target) => {
-                const element = document.getElementById(target);
-                element.innerHTML = hints[step];
-                element.style.border = `var(--color-${step}) solid`;
-            };
-        </script>
-        <script>
-            var times = { test:0, code:0, refactor: 0 };
-            var counting = 'test';
-            const nowCounting = (step) => {
-                counting = step;
-            };
-            const tick = () => {
-                times[counting] ++;
-                times.ptest = times.test / (times.test + times.code + times.refactor);
-                times.pcode = times.code / (times.test + times.code + times.refactor);
-                times.prefactor = times.refactor / (times.test + times.code + times.refactor);
-                renderTimes(times);
+        var hints = {
+            test: renderHints('test'),
+            code: renderHints('code'),
+            refactor: renderHints('refactor')
+        };
+        const displayHints = (step, document, target) => {
+            const element = document.getElementById(target);
+            element.innerHTML = hints[step];
+            element.style.border = `var(--color-${step}) solid`;
+        };
+    </script>
+    <script>
+        var times = { test: 0, code: 0, refactor: 0 };
+        var started = false;
+        var counting = 'test';
+        const nowCounting = (step) => {
+            counting = step;
+        };
+        const tick = () => {
+            times[counting]++;
+            times.ptest = times.test / (times.test + times.code + times.refactor);
+            times.pcode = times.code / (times.test + times.code + times.refactor);
+            times.prefactor = times.refactor / (times.test + times.code + times.refactor);
+            renderTimes(times);
+            if (started) { setTimeout(tick, 1000); }
+        }
+        const renderTimes = (times) => {
+            var root = document.querySelector(':root');
+            root.style.setProperty('--val-test', 360 * times.ptest)
+            root.style.setProperty('--val-code', 360 * times.pcode)
+            root.style.setProperty('--val-refactor', 360 * times.prefactor)
+            document.getElementById('total').innerHTML = formatTime(times.test + times.code + times.refactor);
+            document.getElementById('percentage-test').innerHTML = `${(100 * times.ptest).toFixed(0)}`;
+            document.getElementById('percentage-code').innerHTML = `${(100 * times.pcode).toFixed(0)}`;
+            document.getElementById('percentage-refactor').innerHTML = `${(100 * times.prefactor).toFixed(0)}`;
+        }
+        const start = () => {
+            if (!started) {
                 setTimeout(tick, 1000);
+                started = true;
             }
-            const renderTimes = (times) => {
-                var root = document.querySelector(':root');
-                root.style.setProperty('--val-test', 360 * times.ptest)
-                root.style.setProperty('--val-code', 360 * times.pcode)
-                root.style.setProperty('--val-refactor', 360 * times.prefactor)
-                document.getElementById('times').innerHTML = `${times.test + times.code + times.refactor}s`
+        }
+        const stop = () => {
+            started = false;
+        }
+        const formatTime = (value) => {
+            if (value < 60) {
+                return `${value}s`;
             }
-            setTimeout(tick, 1000);
-        </script>
-    </head>
-    <body>
-        <input type="radio" name="step" id="test" value="test" checked 
-            onclick="displayHints('test', document, 'hints'); nowCounting('test');">
-        <label for="test">test</label>
+            let minutes = (value / 60).toFixed(0);
+            let seconds = value - minutes * 60;
+            return `${minutes}mn ${seconds}s`;
+        }
+    </script>
+</head>
 
-        <input type="radio" name="step" id="code" value="code"
-            onclick="displayHints('code', document, 'hints'); nowCounting('code');">
-        <label for="code">code</label>
+<body>
+    <input type="radio" name="step" id="test" value="test" checked
+        onclick="displayHints('test', document, 'hints'); nowCounting('test');">
+    <label for="test">test</label>
 
-        <input type="radio" name="step" id="refactor" value="refactor"
-            onclick="displayHints('refactor', document, 'hints'); nowCounting('refactor');">
-        <label for="refactor">refactor</label>
+    <input type="radio" name="step" id="code" value="code"
+        onclick="displayHints('code', document, 'hints'); nowCounting('code');">
+    <label for="code">code</label>
 
-        <table width="100%">
-            <tr>
-                <td style="vertical-align: top; width:70%;">
-                    <div class="hints" id="hints"></div>
-                </td>
-                <td style="text-align: center; vertical-align: top; width:30%;">
-                    <div id="pie", class="pie"></div>
-                    <div id="times"></div>
-                </td>
-            </tr>
-        </table>
+    <input type="radio" name="step" id="refactor" value="refactor"
+        onclick="displayHints('refactor', document, 'hints'); nowCounting('refactor');">
+    <label for="refactor">refactor</label>
 
-        <script>
-            document.getElementById('test').click();
-        </script>
-    </body>
+    <table>
+        <tr>
+            <td style="vertical-align: top; width:70%;">
+                <div class="hints" id="hints"></div>
+            </td>
+            <td style="text-align: center; vertical-align: top; width:30%;">
+                <div id="pie" , class="pie"></div>
+                <div id="times">
+                    <button onclick="start();">start</button>
+                    <button onclick="stop();">stop</button>
+                    <br />
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th class="number">%</th>
+                        </tr>
+                        <tr>
+                            <th>test</th>
+                            <td id="percentage-test" class="number">0</td>
+                        </tr>
+                        <tr>
+                            <th>code</th>
+                            <td id="percentage-code" class="number">0</td>
+                        </tr>
+                        <tr>
+                            <th>refactor</th>
+                            <td id="percentage-refactor" class="number">0</td>
+                        </tr>
+                    </table>
+                    <table style="margin-top: 15px;">
+                        <tr>
+                            <th>time</th>
+                            <td id="total" class="number">0s</td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        document.getElementById('test').click();
+    </script>
+</body>
+
 </html>
