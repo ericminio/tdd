@@ -72,6 +72,7 @@
                 root.style.setProperty('--val-test', 360 * times.ptest)
                 root.style.setProperty('--val-code', 360 * times.pcode)
                 root.style.setProperty('--val-refactor', 360 * times.prefactor)
+                document.getElementById('times').innerHTML = `${times.test + times.code + times.refactor}s`
             }
             setTimeout(tick, 1000);
         </script>
