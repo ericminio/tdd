@@ -1,7 +1,7 @@
 var procedures = {
     "test": [
-        "pull?",
         "start the clock",
+        "pull?",
         "intention check",
         "branch?",
         "identify sut",

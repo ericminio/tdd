@@ -30,8 +30,8 @@
                     var(--color-code) calc(var(--val-test) * 1deg) calc((var(--val-test) + var(--val-code)) * 1deg), 
                     var(--color-refactor) calc((360 - var(--val-refactor)) * 1deg)
                 );
-                width: 100px;
-                height: 100px;
+                width: 25vw;
+                height: 25vw;
                 border-radius: 50%;
                 display: inline-block;
             }
@@ -92,8 +92,10 @@
 
         <table width="100%">
             <tr>
-                <td><div class="hints" id="hints"></div></td>
-                <td style="text-align: center; vertical-align: text-top; width:50%;">
+                <td style="vertical-align: top; width:70%;">
+                    <div class="hints" id="hints"></div>
+                </td>
+                <td style="text-align: center; vertical-align: top; width:30%;">
                     <div id="pie", class="pie"></div>
                     <div id="times"></div>
                 </td>
