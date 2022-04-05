@@ -1,4 +1,4 @@
-{
+var procedures = {
     "test": [
         "pull?",
         "start the clock",
@@ -10,6 +10,7 @@
         "choose test type",
         "modify vs add",
         "focus on behaviour",
+        "choose an audience",
         "go to red",
         "investigate surprises",
         "improve red message",
@@ -47,4 +48,4 @@
         "glad?",
         "afraid?"
     ]
-}
+};

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            :root {
+                font-family: Helvetica, sans-serif;
+                --color-test: rgb(216, 30, 30);
+                --color-code: rgb(0, 165, 0);
+                --color-refactor: rgb(0, 103, 205);
+            }
+            .hints {
+                border-radius: 15px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                border-width: 5px;
+            }
+
+            .pie {
+                background: conic-gradient( 
+                    var(--color-test) 45deg, 
+                    var(--color-code) 45deg 110deg, 
+                    var(--color-refactor) 110deg
+                );
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+        </style>
+        <script src="./poh.js"></script>
+        <script>
+            const renderHints = (step) =>
+                `<ul>
+                    ${procedures[step].reduce((acc, item) => acc += `<li>${item}</li>`, '')}
+                </ul>`
+            var hints = { 
+                test:renderHints('test'), 
+                code:renderHints('code'), 
+                refactor:renderHints('refactor') 
+            };  
+            const displayHints = (step, document, target) => {
+                const element = document.getElementById(target);
+                element.innerHTML = hints[step];
+                element.style.border = `var(--color-${step}) solid`;
+            }
+        </script>
+    </head>
+    <body>
+        <input type="radio" name="step" id="test" value="test" checked 
+            onclick="displayHints('test', document, 'hints');">
+        <label for="test">test</label>
+
+        <input type="radio" name="step" id="code" value="code"
+            onclick="displayHints('code', document, 'hints');">
+        <label for="code">code</label>
+
+        <input type="radio" name="step" id="refactor" value="refactor"
+            onclick="displayHints('refactor', document, 'hints');">
+        <label for="refactor">refactor</label>
+
+        <div class="hints" id="hints"></div>
+
+        <div class="pie"></div>
+
+        <script>
+            document.getElementById('test').click();
+        </script>
+    </body>
+</html>
