@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const code = require('fs').readFileSync('formatTime.js').toString();
+const code = require('fs').readFileSync('format-time.js').toString();
 const formatTime = (new Function(`${code} return formatTime;`))();
 
 describe('format time', () => {

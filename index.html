@@ -50,12 +50,12 @@
         }
     </style>
     <script src="./poh.js"></script>
-    <script src="./formatTime.js"></script>
+    <script src="./format-time.js"></script>
     <script>
         const renderHints = (step) =>
             `<ul>
-                    ${procedures[step].reduce((acc, item) => acc += `<li>${item}</li>`, '')}
-                </ul>`
+                ${procedures[step].reduce((acc, item) => acc += `<li>${item}</li>`, '')}
+            </ul>`
         var hints = {
             test: renderHints('test'),
             code: renderHints('code'),
@@ -105,16 +105,13 @@
 </head>
 
 <body>
-    <input type="radio" name="step" id="test" value="test" checked
-        onclick="displayHints('test', document, 'hints'); nowCounting('test');">
+    <input type="radio" name="step" id="test" value="test" checked onclick="displayHints('test', document, 'hints'); nowCounting('test');">
     <label for="test">test</label>
 
-    <input type="radio" name="step" id="code" value="code"
-        onclick="displayHints('code', document, 'hints'); nowCounting('code');">
+    <input type="radio" name="step" id="code" value="code" onclick="displayHints('code', document, 'hints'); nowCounting('code');">
     <label for="code">code</label>
 
-    <input type="radio" name="step" id="refactor" value="refactor"
-        onclick="displayHints('refactor', document, 'hints'); nowCounting('refactor');">
+    <input type="radio" name="step" id="refactor" value="refactor" onclick="displayHints('refactor', document, 'hints'); nowCounting('refactor');">
     <label for="refactor">refactor</label>
 
     <table>
