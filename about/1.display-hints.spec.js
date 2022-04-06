@@ -6,15 +6,15 @@ const fs = require('fs');
 const assets = {
     '/': { 
         contentType: 'text/html', 
-        content:fs.readFileSync('index.html').toString() 
+        content:fs.readFileSync('../app/index.html').toString() 
     },
     '/poh.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('poh.js').toString() 
+        content:fs.readFileSync('../app/poh.js').toString() 
     },
     '/format-time.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('format-time.js').toString() 
+        content:fs.readFileSync('../app/format-time.js').toString() 
     }
 };
 

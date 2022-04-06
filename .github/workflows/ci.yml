@@ -17,15 +17,17 @@ jobs:
       - name: install node
         uses: actions/setup-node@v2
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: './about/.nvmrc'
       - name: info
         run: |
           node --version
           npm --version
       - name: install
         run: |
+          cd about
           npm install
       - name: tests
         run: |
+          cd about
           npm test
           
