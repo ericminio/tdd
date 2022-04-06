@@ -69,6 +69,6 @@ describe('display hints when choosing a step', () => {
     });
     
     it('defaults to test', () => {        
-        expect(hints.innerHTML).to.contain('go to red');
+        expect(hints.textContent).to.contain('go to red');
     });
 });
