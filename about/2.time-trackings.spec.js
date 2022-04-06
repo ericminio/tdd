@@ -41,4 +41,9 @@ describe('time tracking', () => {
         expect(page.document.getElementById('percentage-code').innerHTML).to.equal('38');
         expect(page.document.getElementById('percentage-refactor').innerHTML).to.equal('38');
     });
+
+    it('assumes one tick is one second', () => {
+        work();
+        expect(page.document.getElementById('total').innerHTML).to.equal('8s');
+    });
 });
