@@ -14,7 +14,7 @@ describe('display hints when choosing a step', () => {
         page.close();
     })
 
-    it('works with step test', () => {        
+    it('works with step test', () => {
         let step = page.document.getElementById('test');
         step.click();
 
@@ -32,8 +32,8 @@ describe('display hints when choosing a step', () => {
 
         expect(hints.innerHTML).to.contain('duplication?');
     });
-    
-    it('defaults to test', () => {        
+
+    it('defaults to test', () => {
         expect(hints.textContent).to.contain('go to red');
     });
 });
