@@ -67,4 +67,8 @@ describe('display hints when choosing a step', () => {
 
         expect(hints.innerHTML).to.contain('duplication?');
     });
+    
+    it('defaults to test', () => {        
+        expect(hints.innerHTML).to.contain('go to red');
+    });
 });
