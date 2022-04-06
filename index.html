@@ -50,6 +50,7 @@
         }
     </style>
     <script src="./poh.js"></script>
+    <script src="./formatTime.js"></script>
     <script>
         const renderHints = (step) =>
             `<ul>
@@ -99,15 +100,7 @@
         }
         const stop = () => {
             started = false;
-        }
-        const formatTime = (value) => {
-            if (value < 60) {
-                return `${value}s`;
-            }
-            let minutes = (value / 60).toFixed(0);
-            let seconds = value - minutes * 60;
-            return `${minutes}mn ${seconds}s`;
-        }
+        }        
     </script>
 </head>
 
