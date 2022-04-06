@@ -74,7 +74,7 @@
         const nowCounting = (step) => {
             counting = step;
         };
-        const tick = () => {
+        var tick = () => {
             times[counting]++;
             times.ptest = times.test / (times.test + times.code + times.refactor);
             times.pcode = times.code / (times.test + times.code + times.refactor);
