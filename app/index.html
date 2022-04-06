@@ -68,6 +68,7 @@
         };
     </script>
     <script>
+        var delay = 1000;
         var times = { test: 0, code: 0, refactor: 0 };
         var started = false;
         var counting = 'test';
@@ -80,7 +81,7 @@
             times.pcode = times.code / (times.test + times.code + times.refactor);
             times.prefactor = times.refactor / (times.test + times.code + times.refactor);
             renderTimes(times);
-            if (started) { setTimeout(tick, 1000); }
+            if (started) { setTimeout(tick, delay); }
         }
         const renderTimes = (times) => {
             var root = document.querySelector(':root');
@@ -92,13 +93,13 @@
             document.getElementById('percentage-code').innerHTML = `${(100 * times.pcode).toFixed(0)}`;
             document.getElementById('percentage-refactor').innerHTML = `${(100 * times.prefactor).toFixed(0)}`;
         }
-        const start = () => {
+        var start = () => {
             if (!started) {
-                setTimeout(tick, 1000);
+                setTimeout(tick, delay);
                 started = true;
             }
         }
-        const stop = () => {
+        var stop = () => {
             started = false;
         }        
     </script>
@@ -122,8 +123,8 @@
             <td style="text-align: center; vertical-align: top; width:30%;">
                 <div id="pie" , class="pie"></div>
                 <div id="times">
-                    <button onclick="start();">start</button>
-                    <button onclick="stop();">stop</button>
+                    <button id="start" onclick="start();">start</button>
+                    <button id="stop" onclick="stop();">stop</button>
                     <br />
                     <table>
                         <tr>
