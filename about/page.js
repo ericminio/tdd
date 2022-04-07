@@ -7,6 +7,10 @@ const assets = {
         contentType: 'text/html', 
         content:fs.readFileSync('../app/index.html').toString() 
     },
+    '/app.css': { 
+        contentType: 'text/css', 
+        content:fs.readFileSync('../app/app.css').toString() 
+    },
     '/poh.js': { 
         contentType: 'application/javascript', 
         content:fs.readFileSync('../app/poh.js').toString() 

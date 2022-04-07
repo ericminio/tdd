@@ -1,0 +1,43 @@
+:root {
+    font-family: Helvetica, sans-serif;
+    --color-test: rgb(216, 30, 30);
+    --color-code: rgb(0, 165, 0);
+    --color-refactor: rgb(0, 103, 205);
+
+    --val-test: 360;
+    --val-code: 0;
+    --val-refactor: 0;
+}
+
+li {
+    white-space: nowrap;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+.number {
+    text-align: right;
+}
+
+.hints {
+    border-radius: 15px;
+    border-width: 5px;
+    display: block;
+    padding-right: 5px;
+}
+
+.pie {
+    background: conic-gradient(var(--color-test) calc(var(--val-test) * 1deg),
+            var(--color-code) calc(var(--val-test) * 1deg) calc((var(--val-test) + var(--val-code)) * 1deg),
+            var(--color-refactor) calc((360 - var(--val-refactor)) * 1deg));
+    width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    display: inline-block;
+}
