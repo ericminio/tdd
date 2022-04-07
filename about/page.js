@@ -14,6 +14,14 @@ const assets = {
     '/format-time.js': { 
         contentType: 'application/javascript', 
         content:fs.readFileSync('../app/format-time.js').toString() 
+    },
+    '/render-times.js': { 
+        contentType: 'application/javascript', 
+        content:fs.readFileSync('../app/render-times.js').toString() 
+    },
+    '/render-hints.js': { 
+        contentType: 'application/javascript', 
+        content:fs.readFileSync('../app/render-hints.js').toString() 
     }
 };
 const server = http.createServer((request, response) => {

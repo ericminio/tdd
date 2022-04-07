@@ -51,22 +51,8 @@
     </style>
     <script src="./poh.js"></script>
     <script src="./format-time.js"></script>
-    <script>
-        const renderHints = (step) =>
-            `<ul>
-                ${procedures[step].reduce((acc, item) => acc += `<li>${item}</li>`, '')}
-            </ul>`
-        var hints = {
-            test: renderHints('test'),
-            code: renderHints('code'),
-            refactor: renderHints('refactor')
-        };
-        const displayHints = (step, document, target) => {
-            const element = document.getElementById(target);
-            element.innerHTML = hints[step];
-            element.style.border = `var(--color-${step}) solid`;
-        };
-    </script>
+    <script src="./render-times.js"></script>
+    <script src="./render-hints.js"></script>
     <script>
         var delay = 1000;
         var times = { test: 0, code: 0, refactor: 0 };
@@ -76,23 +62,14 @@
             counting = step;
         };
         var tick = () => {
-            times[counting]++;
-            times.ptest = times.test / (times.test + times.code + times.refactor);
-            times.pcode = times.code / (times.test + times.code + times.refactor);
-            times.prefactor = times.refactor / (times.test + times.code + times.refactor);
-            renderTimes(times);
+            updateTimes(times);
+            renderTimes(times, document);
             if (started) { setTimeout(tick, delay); }
         }
-        const renderTimes = (times) => {
-            var root = document.querySelector(':root');
-            root.style.setProperty('--val-test', 360 * times.ptest)
-            root.style.setProperty('--val-code', 360 * times.pcode)
-            root.style.setProperty('--val-refactor', 360 * times.prefactor)
-            document.getElementById('total').innerHTML = formatTime(times.test + times.code + times.refactor);
-            document.getElementById('percentage-test').innerHTML = `${(100 * times.ptest).toFixed(0)}`;
-            document.getElementById('percentage-code').innerHTML = `${(100 * times.pcode).toFixed(0)}`;
-            document.getElementById('percentage-refactor').innerHTML = `${(100 * times.prefactor).toFixed(0)}`;
+        const updateTimes = (times) => {
+            times[counting]++;
         }
+        
         var start = () => {
             if (!started) {
                 setTimeout(tick, delay);
