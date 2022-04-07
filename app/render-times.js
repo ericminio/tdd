@@ -5,6 +5,7 @@ const renderTimes = (times, document) => {
     renderPie(times, document);
     renderPercentageTable(times, document);
     renderTotalTime(times, document);
+    renderStepTime(times, document);
 };
 
 const renderPie = (times, document) => {
@@ -20,5 +21,9 @@ const renderPercentageTable = (times, document) => {
 };
 
 const renderTotalTime = (times, document) => {
-    document.getElementById('total').innerHTML = formatTime(times.test + times.code + times.refactor);
+    document.getElementById('total-time').innerHTML = formatTime(times.test + times.code + times.refactor);
+};
+
+const renderStepTime = (times, document) => {
+    document.getElementById('step-time').innerHTML = formatTime(times.step);
 };

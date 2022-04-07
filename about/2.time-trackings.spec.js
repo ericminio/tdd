@@ -13,7 +13,7 @@ describe('time tracking', () => {
     it('keeps track of time distribution', () => {
         work();
         expect(page.window.times).to.deep.equal({
-            test: 2, code: 3, refactor: 3,
+            test: 2, code: 3, refactor: 3, step:3,
             ptest: 0.25, pcode: 0.375, prefactor: 0.375
         });
     });
@@ -44,7 +44,12 @@ describe('time tracking', () => {
 
     it('assumes one tick is one second', () => {
         work();
-        expect(page.document.getElementById('total').innerHTML).to.equal('8s');
+        expect(page.document.getElementById('total-time').innerHTML).to.equal('8s');
+    });
+
+    it('keep track of the time spent in current step', () => {
+        work();
+        expect(page.document.getElementById('step-time').innerHTML).to.equal('3s');
     });
 
     describe('updates of arc sizes used by the pie chart', () => {
