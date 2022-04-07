@@ -46,4 +46,21 @@ describe('time tracking', () => {
         work();
         expect(page.document.getElementById('total').innerHTML).to.equal('8s');
     });
+
+    describe('updates of arc sizes used by the pie chart', () => {
+
+        let root;
+        beforeEach(() => {
+            work();
+            root = page.document.querySelector(':root');
+        });
+
+        it('updates the deg value for test', () => {
+            expect(root.style.getPropertyValue('--val-test')).to.equal('90');
+        });
+
+        it('updates the deg value for code', () => {
+            expect(root.style.getPropertyValue('--val-code')).to.equal('135');
+        });
+    });
 });

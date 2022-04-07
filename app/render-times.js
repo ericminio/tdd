@@ -11,7 +11,6 @@ const renderPie = (times, document) => {
     var root = document.querySelector(':root');
     root.style.setProperty('--val-test', 360 * times.ptest);
     root.style.setProperty('--val-code', 360 * times.pcode);
-    root.style.setProperty('--val-refactor', 360 * times.prefactor);
 };
 
 const renderPercentageTable = (times, document) => {

@@ -6,7 +6,6 @@
 
     --val-test: 360;
     --val-code: 0;
-    --val-refactor: 0;
 }
 
 li {
@@ -33,9 +32,10 @@ th {
 }
 
 .pie {
-    background: conic-gradient(var(--color-test) calc(var(--val-test) * 1deg),
-            var(--color-code) calc(var(--val-test) * 1deg) calc((var(--val-test) + var(--val-code)) * 1deg),
-            var(--color-refactor) calc((360 - var(--val-refactor)) * 1deg));
+    background-image: conic-gradient(
+        var(--color-test) 0 calc(var(--val-test) * 1deg),
+        var(--color-code) 0 calc((var(--val-test) + var(--val-code)) * 1deg),
+        var(--color-refactor) 0 100%);
     width: 25vw;
     height: 25vw;
     border-radius: 50%;
