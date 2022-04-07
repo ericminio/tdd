@@ -15,7 +15,6 @@ var procedures = {
         "investigate surprises",
         "improve red message",
         "time check",
-        "big bang?",
         "revert?",
         "back to refactor?",
         "commit?"
