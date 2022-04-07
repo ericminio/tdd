@@ -31,6 +31,7 @@ var procedures = {
     "refactor": [
         "start the clock",
         "control check",
+        "own the code",
         "magic number?",
         "bad name?",
         "duplication?",
