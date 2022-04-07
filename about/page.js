@@ -26,6 +26,10 @@ const assets = {
     '/render-hints.js': { 
         contentType: 'application/javascript', 
         content:fs.readFileSync('../app/render-hints.js').toString() 
+    },
+    '/model.js': { 
+        contentType: 'application/javascript', 
+        content:fs.readFileSync('../app/model.js').toString() 
     }
 };
 const server = http.createServer((request, response) => {

@@ -9,21 +9,15 @@
     <script src="format-time.js"></script>
     <script src="render-times.js"></script>
     <script src="render-hints.js"></script>
+    <script src="model.js"></script>
     <script>
-        var delay = 1000;
-        var times = { test: 0, code: 0, refactor: 0 };
         var started = false;
-        var counting = 'test';
-        const nowCounting = (step) => {
-            counting = step;
-        };
+        var delay = 1000;
+
         var tick = () => {
-            updateTimes(times);
+            updateTimes(times, counting);
             renderTimes(times, document);
             if (started) { setTimeout(tick, delay); }
-        }
-        const updateTimes = (times) => {
-            times[counting]++;
         }
         
         var start = () => {
