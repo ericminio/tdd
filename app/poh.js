@@ -7,7 +7,7 @@ var procedures = {
         "pull?",
         "branch?",
         "control check",
-        "choose test type",
+        "choose pyramid level",
         "modify vs add",
         "choose an audience",
         "focus on behaviour",
