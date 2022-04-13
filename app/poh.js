@@ -22,7 +22,10 @@ var procedures = {
     "code": [
         "start the clock",
         "go to green",
-        "control check",
+        "magic number is ok",
+        "duplication is ok",
+        "conditional is ok",
+        "whatever is ok",
         "time check",
         "revert?",
         "commit?"
