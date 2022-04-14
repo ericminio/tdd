@@ -13,8 +13,7 @@ describe('time tracking', () => {
     it('keeps track of time distribution', () => {
         work();
         expect(page.window.times).to.deep.equal({
-            test: 2, code: 3, refactor: 3, step:3,
-            ptest: 0.25, pcode: 0.375, prefactor: 0.375
+            test: 2, code: 3, refactor: 3, step:3
         });
     });
 

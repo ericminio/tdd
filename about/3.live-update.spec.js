@@ -15,8 +15,7 @@ describe('live update', () => {
         page.document.getElementById('start').click();
         setTimeout(() => {
             expect(page.window.times).to.deep.equal({
-                test: 2, code: 0, refactor: 0, step:2,
-                ptest: 1, pcode: 0, prefactor: 0
+                test: 2, code: 0, refactor: 0, step:2
             });
             done();
         }, 30);
@@ -29,8 +28,7 @@ describe('live update', () => {
             page.document.getElementById('stop').click();
             setTimeout(() => {
                 expect(page.window.times).to.deep.equal({
-                    test: 3, code: 0, refactor: 0, step: 3,
-                    ptest: 1, pcode: 0, prefactor: 0
+                    test: 3, code: 0, refactor: 0, step: 3
                 });
                 done();
             }, 30);

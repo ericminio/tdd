@@ -28,7 +28,7 @@
         }
         var stop = () => {
             started = false;
-        }        
+        }   
     </script>
 </head>
 
@@ -60,25 +60,25 @@
                         </tr>
                         <tr>
                             <th style="color:var(--color-test)">test</th>
-                            <td id="percentage-test" class="number">0</td>
+                            <td id="percentage-test" class="number"></td>
                         </tr>
                         <tr>
                             <th style="color:var(--color-code)">code</th>
-                            <td id="percentage-code" class="number">0</td>
+                            <td id="percentage-code" class="number"></td>
                         </tr>
                         <tr>
                             <th style="color:var(--color-refactor)">refactor</th>
-                            <td id="percentage-refactor" class="number">0</td>
+                            <td id="percentage-refactor" class="number"></td>
                         </tr>
                     </table>
                     <table style="margin-top: 15px;">
                         <tr>
                             <th>total</th>
-                            <td id="total-time" class="number">0s</td>
+                            <td id="total-time" class="number"></td>
                         </tr>
                         <tr>
                             <th>step</th>
-                            <td id="step-time" class="number">0s</td>
+                            <td id="step-time" class="number"></td>
                         </tr>
                     </table>
                 </div>
@@ -88,6 +88,7 @@
 
     <script>
         document.getElementById('test').click();
+        renderTimes(times, document);
     </script>
 </body>
 
