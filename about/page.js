@@ -33,15 +33,28 @@ const assets = {
     }
 };
 const server = http.createServer((request, response) => {
+    if (request.url.startsWith('/index.html?')) {
+        request.url = '/';
+    }
     response.setHeader('Content-Length', assets[request.url].content.length);
     response.setHeader('Content-Type', assets[request.url].contentType);
     response.write(assets[request.url].content);
     response.end();
 });
-
-const open = (done) => {
+const sockets = [];
+server.on('connection', (socket)=> {
+    sockets.push(socket);
+    socket.on('close', ()=> {
+        sockets.splice(sockets.indexOf(socket), 1);
+    });
+});
+const open = (done, query) => {
     server.listen(port, () => {
-        JSDOM.fromURL(`http://localhost:${port}`, { 
+        let url = `http://localhost:${port}`;
+        if (query !== undefined) {
+            url += query;
+        }
+        JSDOM.fromURL(url, { 
             runScripts: "dangerously", 
             resources: "usable" 
         }).then(dom => {   
@@ -57,6 +70,7 @@ const open = (done) => {
 }
 
 const close = (done) => {
+    sockets.forEach(socket=> socket.destroy());
     server.close(done);
 }
 

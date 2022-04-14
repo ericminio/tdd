@@ -6,8 +6,8 @@ describe('time tracking', () => {
     beforeEach((done) => {
         page.open(done)
     });
-    afterEach(() => {
-        page.close();
+    afterEach((done) => {
+        page.close(done);
     })
 
     it('keeps track of time distribution', () => {

@@ -6,8 +6,8 @@ describe('live update', () => {
     beforeEach((done) => {
         page.open(done)
     });
-    afterEach(() => {
-        page.close();
+    afterEach((done) => {
+        page.close(done);
     })
 
     it('is triggered via start', (done) => {

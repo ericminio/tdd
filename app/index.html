@@ -88,6 +88,10 @@
 
     <script>
         document.getElementById('test').click();
+        const searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has("test")) { times.test = parseInt(searchParams.get('test')); }
+        if (searchParams.has("code")) { times.code = parseInt(searchParams.get('code')); }
+        if (searchParams.has("refactor")) { times.refactor = parseInt(searchParams.get('refactor')); }
         renderTimes(times, document);
     </script>
 </body>

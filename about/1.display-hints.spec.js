@@ -10,8 +10,8 @@ describe('display hints when choosing a step', () => {
             done();
         })
     });
-    afterEach(() => {
-        page.close();
+    afterEach((done) => {
+        page.close(done);
     })
 
     it('works with step test', () => {
