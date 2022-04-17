@@ -34,5 +34,5 @@ const renderStepTime = (times, document) => {
 
 const renderSaveLink = (times, document) => {
     let query = `test=${times.test}&code=${times.code}&refactor=${times.refactor}`;
-    document.getElementById('save-link').href = `/index.html?${query}`;
+    document.getElementById('save-link').href = `index.html?${query}`;
 };
