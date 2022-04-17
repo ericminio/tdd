@@ -1,4 +1,4 @@
-const renderTimes = (times, document) => {
+var renderTimes = (times, document) => {
     let total = (times.test + times.code + times.refactor);
     let percentages = { 
         test:times.test > 0 ? times.test / total : 0, 
@@ -9,6 +9,7 @@ const renderTimes = (times, document) => {
     renderPercentageTable(percentages, document);
     renderTotalTime(times, document);
     renderStepTime(times, document);
+    renderSaveLink(times, document);
 };
 
 const renderPie = (percentages, document) => {
@@ -29,4 +30,9 @@ const renderTotalTime = (times, document) => {
 
 const renderStepTime = (times, document) => {
     document.getElementById('step-time').innerHTML = formatTime(times.step);
+};
+
+const renderSaveLink = (times, document) => {
+    let query = `test=${times.test}&code=${times.code}&refactor=${times.refactor}`;
+    document.getElementById('save-link').href = `/index.html?${query}`;
 };

@@ -51,4 +51,12 @@ describe('session', () => {
             });
         });
     });
+
+    it('can be saved', () => {      
+        page.window.times = { test:1, code:2, refactor:3 };  
+        page.window.renderTimes(page.window.times, page.document);
+        let saveLink = page.document.getElementById('save-link');
+
+        expect(saveLink.href).to.contain('?test=1&code=2&refactor=3');
+    });
 });
