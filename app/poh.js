@@ -46,6 +46,7 @@ var procedures = {
         "revert?",
         "commit?",
         "glad?",
-        "afraid?"
+        "afraid?",
+        "backlog update?"
     ]
 };
