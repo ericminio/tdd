@@ -1,40 +1,9 @@
 const { JSDOM } = require('jsdom');
+const { assets } = require('./assets');
 const http = require('http');
 const port = 5001;
-const fs = require('fs');
-const readAsset = (file) => {
-    return fs.readFileSync(`./instrumented/${file}`).toString() 
-}
-const assets = {
-    '/': { 
-        contentType: 'text/html', 
-        content: readAsset('index.html')
-    },
-    '/app.css': { 
-        contentType: 'text/css', 
-        content: readAsset('app.css')
-    },
-    '/poh.js': { 
-        contentType: 'application/javascript', 
-        content: readAsset('poh.js')
-    },
-    '/format-time.js': { 
-        contentType: 'application/javascript', 
-        content: readAsset('format-time.js')
-    },
-    '/render-times.js': { 
-        contentType: 'application/javascript', 
-        content: readAsset('render-times.js')
-    },
-    '/render-hints.js': { 
-        contentType: 'application/javascript', 
-        content: readAsset('render-hints.js')
-    },
-    '/model.js': { 
-        contentType: 'application/javascript', 
-        content: readAsset('model.js')
-    }
-};
+const sockets = [];
+
 const server = http.createServer((request, response) => {
     if (request.url.startsWith('/index.html?')) {
         request.url = '/';
@@ -44,13 +13,13 @@ const server = http.createServer((request, response) => {
     response.write(assets[request.url].content);
     response.end();
 });
-const sockets = [];
 server.on('connection', (socket)=> {
     sockets.push(socket);
     socket.on('close', ()=> {
         sockets.splice(sockets.indexOf(socket), 1);
     });
 });
+
 const open = (done, query) => {
     server.listen(port, () => {
         let url = `http://localhost:${port}`;
