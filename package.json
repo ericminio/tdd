@@ -4,8 +4,9 @@
   "description": "",
   "main": "format-time.spec.js",
   "scripts": {
-    "test": "mocha *.spec.js --exit --timeout 0",
-    "coverage": "nyc --reporter=text --reporter=html npm run test"
+    "pretest": "rm -rf ./.nyc_output && mkdir .nyc_output && nyc instrument --delete --complete-copy ./app ./instrumented ",
+    "test": "mocha about/*.spec.js --exit --timeout 0",
+    "posttest": "nyc --reporter=text --reporter=text-summary --reporter=html report"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,6 @@
     "nyc": "^15.1.0"
   },
   "nyc": {
-    "cwd": "..",
     "all": true,
     "include": [ "app/*.js" ]
   }

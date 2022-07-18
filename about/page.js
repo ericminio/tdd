@@ -2,34 +2,37 @@ const { JSDOM } = require('jsdom');
 const http = require('http');
 const port = 5001;
 const fs = require('fs');
+const readAsset = (file) => {
+    return fs.readFileSync(`./instrumented/${file}`).toString() 
+}
 const assets = {
     '/': { 
         contentType: 'text/html', 
-        content:fs.readFileSync('../app/index.html').toString() 
+        content: readAsset('index.html')
     },
     '/app.css': { 
         contentType: 'text/css', 
-        content:fs.readFileSync('../app/app.css').toString() 
+        content: readAsset('app.css')
     },
     '/poh.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('../app/poh.js').toString() 
+        content: readAsset('poh.js')
     },
     '/format-time.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('../app/format-time.js').toString() 
+        content: readAsset('format-time.js')
     },
     '/render-times.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('../app/render-times.js').toString() 
+        content: readAsset('render-times.js')
     },
     '/render-hints.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('../app/render-hints.js').toString() 
+        content: readAsset('render-hints.js')
     },
     '/model.js': { 
         contentType: 'application/javascript', 
-        content:fs.readFileSync('../app/model.js').toString() 
+        content: readAsset('model.js')
     }
 };
 const server = http.createServer((request, response) => {
@@ -70,6 +73,9 @@ const open = (done, query) => {
 }
 
 const close = (done) => {
+    let coverage = page.window.__coverage__;
+    require('fs').writeFileSync('.nyc_output/coverage.json', JSON.stringify(coverage));
+
     sockets.forEach(socket=> socket.destroy());
     server.close(done);
 }
