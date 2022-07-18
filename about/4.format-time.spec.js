@@ -1,14 +1,15 @@
 const { expect } = require('chai');
 const code = require('fs').readFileSync('./instrumented/format-time.js').toString();
-const {cov_1kkeo2hz14, formatTime} = (new Function(`${code} \n return {cov_1kkeo2hz14, formatTime};`))();
+const instrumentorName = code.substring(9, code.indexOf('(')).trim();
+const {instrumentor, formatTime} = (new Function(`${code} \n return {instrumentor:${instrumentorName}, formatTime};`))();
 
 describe('format time', () => {
 
     after(() => {
-        let coverage = cov_1kkeo2hz14();
+        let coverage = instrumentor();
         let data = {};
         data[coverage.path] = coverage;
-        require('fs').writeFileSync('.nyc_output/cov_1kkeo2hz14.json', JSON.stringify(data));
+        require('fs').writeFileSync(`.nyc_output/${instrumentor}.json`, JSON.stringify(data));
     });
 
     it('keeps seconds as is', () => {
