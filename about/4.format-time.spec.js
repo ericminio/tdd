@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const code = require('fs').readFileSync('./instrumented/format-time.js').toString();
-const instrumentorName = code.substring(9, code.indexOf('(')).trim();
+const instrumentorName = code.substring(code.indexOf('cov_'), code.indexOf('(')).trim();
 const {instrumentor, formatTime} = (new Function(`${code} \n return {instrumentor:${instrumentorName}, formatTime};`))();
 
 describe('format time', () => {
@@ -9,7 +9,8 @@ describe('format time', () => {
         let coverage = instrumentor();
         let data = {};
         data[coverage.path] = coverage;
-        require('fs').writeFileSync(`.nyc_output/${instrumentor}.json`, JSON.stringify(data));
+        let fileName = `.nyc_output/${instrumentorName}-${Date.now()}.json`;
+        require('fs').writeFileSync(fileName, JSON.stringify(data));
     });
 
     it('keeps seconds as is', () => {
