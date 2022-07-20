@@ -1,5 +1,6 @@
 const { expect } = require('chai');
-const { server, page } = require('./page');
+const { server } = require('./server');
+const { page } = require('./page');
 
 describe('time tracking', () => {
 

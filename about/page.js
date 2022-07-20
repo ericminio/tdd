@@ -1,26 +1,7 @@
 const { JSDOM } = require('jsdom');
-const { servingAssets } = require('./serving-assets');
-const http = require('http');
-const port = 5001;
-const sockets = [];
-
-const server = http.createServer(servingAssets);
-server.on('connection', (socket)=> {
-    sockets.push(socket);
-    socket.on('close', ()=> {
-        sockets.splice(sockets.indexOf(socket), 1);
-    });
-});
-server.stop = (done) => {
-    sockets.forEach(socket=> socket.destroy());
-    server.close(done);
-};
-server.start = (done) => {
-    server.listen(port, done);
-};
 
 const open = (done, query) => {
-    let url = `http://localhost:${port}`;
+    let url = `http://localhost:5001`;
     if (query !== undefined) {
         url += query;
     }
@@ -46,4 +27,4 @@ const close = (done) => {
 
 const page = { open, close };
 
-module.exports = { server, page };
+module.exports = { page };
