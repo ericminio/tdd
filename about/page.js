@@ -11,6 +11,10 @@ server.on('connection', (socket)=> {
         sockets.splice(sockets.indexOf(socket), 1);
     });
 });
+server.stop = (done) => {
+    sockets.forEach(socket=> socket.destroy());
+    server.close(done);
+};
 
 const open = (done, query) => {
     server.listen(port, () => {
@@ -36,9 +40,7 @@ const open = (done, query) => {
 const close = (done) => {
     let coverage = page.window.__coverage__;
     require('fs').writeFileSync('.nyc_output/coverage.json', JSON.stringify(coverage));
-
-    sockets.forEach(socket=> socket.destroy());
-    server.close(done);
+    server.stop(done);
 }
 
 const page = { open, close };
