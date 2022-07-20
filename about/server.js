@@ -1,21 +1,36 @@
 const http = require('http');
-const sockets = [];
 
-const { servingAssets } = require('./serving-assets');
-const server = http.createServer(servingAssets);
+class Server {
+    constructor(port, handler) {
+        this.sockets = [];
+        this.port = port;
+        this.internal = http.createServer();
+        this.internal.on('connection', (socket)=> {
+            this.sockets.push(socket);
+            socket.on('close', ()=> {
+                this.sockets.splice(this.sockets.indexOf(socket), 1);
+            });
+        });
+        this.handler = handler || this.notImplemented;
+        this.use(this.handler);
+    }
+    start(done) {
+        this.internal.listen(this.port, done);
+    }
+    stop(done) {
+        this.sockets.forEach(socket=> socket.destroy());
+        this.internal.close(done);
+    }
+    use(handler) {
+        this.internal.removeListener('request', this.handler);
+        this.handler = handler;
+        this.internal.on('request', this.handler);
+    }
 
-server.on('connection', (socket)=> {
-    sockets.push(socket);
-    socket.on('close', ()=> {
-        sockets.splice(sockets.indexOf(socket), 1);
-    });
-});
-server.stop = (done) => {
-    sockets.forEach(socket=> socket.destroy());
-    server.close(done);
+    notImplemented(incoming, response) {
+        response.writeHead(501, { 'content-Type': 'text/plain' });
+        response.end('NOT IMPLEMENTED');
+    }
 };
-server.start = (done) => {
-    server.listen(5001, done);
-};
 
-module.exports = { server };
+module.exports = { Server };

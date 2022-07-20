@@ -5,7 +5,7 @@
   "main": "format-time.spec.js",
   "scripts": {
     "pretest": "rm -rf ./.nyc_output && mkdir .nyc_output && nyc instrument --delete --complete-copy ./app ./instrumented ",
-    "test": "mocha about/*.spec.js --exit --timeout 0",
+    "test": "mocha about/*.spec.js --exit",
     "posttest": "nyc --reporter=text --reporter=text-summary --reporter=html report"
   },
   "repository": {

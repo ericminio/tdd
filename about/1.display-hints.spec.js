@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { server } = require('./server');
+const { server } = require('./serving-assets');
 const { page } = require('./page');
 
 describe('display hints when choosing a step', () => {

@@ -1,4 +1,5 @@
 const { assets } = require('./assets');
+const { Server } = require('./server');
 
 const servingAssets = (request, response) => {
     if (request.url.startsWith('/index.html?')) {
@@ -10,4 +11,4 @@ const servingAssets = (request, response) => {
     response.end();
 };
 
-module.exports = { servingAssets } ;
+module.exports = { server: new Server(5001, servingAssets) } ;
