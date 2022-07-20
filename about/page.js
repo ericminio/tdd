@@ -1,18 +1,10 @@
 const { JSDOM } = require('jsdom');
-const { assets } = require('./assets');
+const { servingAssets } = require('./serving-assets');
 const http = require('http');
 const port = 5001;
 const sockets = [];
 
-const server = http.createServer((request, response) => {
-    if (request.url.startsWith('/index.html?')) {
-        request.url = '/';
-    }
-    response.setHeader('Content-Length', assets[request.url].content.length);
-    response.setHeader('Content-Type', assets[request.url].contentType);
-    response.write(assets[request.url].content);
-    response.end();
-});
+const server = http.createServer(servingAssets);
 server.on('connection', (socket)=> {
     sockets.push(socket);
     socket.on('close', ()=> {
