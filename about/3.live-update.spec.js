@@ -1,14 +1,14 @@
 const { expect } = require('chai');
-const { page } = require('./page');
+const { server, page } = require('./page');
 
 describe('live update', () => {
 
     beforeEach((done) => {
-        page.open(done)
+        server.start(() => { page.open(done); });
     });
     afterEach((done) => {
-        page.close(done);
-    })
+        page.close(() => { server.stop(done); });
+    });
 
     it('is triggered via start', (done) => {
         page.window.delay = 10;

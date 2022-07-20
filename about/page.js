@@ -15,34 +15,35 @@ server.stop = (done) => {
     sockets.forEach(socket=> socket.destroy());
     server.close(done);
 };
+server.start = (done) => {
+    server.listen(port, done);
+};
 
 const open = (done, query) => {
-    server.listen(port, () => {
-        let url = `http://localhost:${port}`;
-        if (query !== undefined) {
-            url += query;
-        }
-        JSDOM.fromURL(url, { 
-            runScripts: "dangerously", 
-            resources: "usable" 
-        }).then(dom => {   
-            page.window = dom.window;             
-            page.document = dom.window.document;
-            page.document.addEventListener('DOMContentLoaded', () => {                    
-                done();
-            });                
-        }).catch(error => {
-            done(error);
-        });
-    });    
-}
+    let url = `http://localhost:${port}`;
+    if (query !== undefined) {
+        url += query;
+    }
+    JSDOM.fromURL(url, { 
+        runScripts: "dangerously", 
+        resources: "usable" 
+    }).then(dom => {   
+        page.window = dom.window;             
+        page.document = dom.window.document;
+        page.document.addEventListener('DOMContentLoaded', () => {                    
+            done();
+        });                
+    }).catch(error => {
+        done(error);
+    });   
+};
 
 const close = (done) => {
     let coverage = page.window.__coverage__;
     require('fs').writeFileSync('.nyc_output/coverage.json', JSON.stringify(coverage));
-    server.stop(done);
-}
+    done();
+};
 
 const page = { open, close };
 
-module.exports = { page };
+module.exports = { server, page };

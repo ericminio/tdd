@@ -1,15 +1,15 @@
 const { expect } = require('chai');
-const { page } = require('./page');
+const { server, page } = require('./page');
 
 describe('session', () => {
 
     describe('start', () => {
 
         beforeEach((done) => {
-            page.open(done)
+            server.start(() => { page.open(done); });
         });
         afterEach((done) => {
-            page.close(done);
+            page.close(() => { server.stop(done); });
         });
 
         it('zeroes all times', () => {
@@ -39,10 +39,10 @@ describe('session', () => {
     describe('initialization to non-zero start', () => {
 
         beforeEach((done) => {
-            page.open(done, '/index.html?test=1&code=2&refactor=3')
+            server.start(() => { page.open(done, '/index.html?test=1&code=2&refactor=3'); });
         });
         afterEach((done) => {
-            page.close(done);
+            page.close(() => { server.stop(done); });
         });
 
         it('is possible via query string', () => {
