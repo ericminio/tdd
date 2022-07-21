@@ -1,7 +1,8 @@
 const { expect } = require('chai');
-const { expose } = require('./support/source');
 const { saveCoverage } = require('./support/coverage');
-const { formatTime } = expose({ sut: 'formatTime', file:'./instrumented/format-time.js' });
+const { expose } = require('./support/source');
+const { assets: { '/format-time.js': { content: code }} } = require('./assets');
+const { formatTime } = expose({ sut: 'formatTime', code });
 
 describe('format time', () => {
 

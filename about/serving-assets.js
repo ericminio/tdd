@@ -7,8 +7,7 @@ const servingAssets = (request, response) => {
     }
     response.setHeader('Content-Length', assets[request.url].content.length);
     response.setHeader('Content-Type', assets[request.url].contentType);
-    response.write(assets[request.url].content);
-    response.end();
+    response.end(assets[request.url].content);
 };
 
 module.exports = { server: new Server(5001, servingAssets) } ;
