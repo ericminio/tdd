@@ -1,6 +1,6 @@
 const { expect } = require('chai');
-const { server } = require('./serving-assets');
-const { page } = require('./page');
+const { server } = require('./support/serving-assets');
+const { page } = require('./support/page');
 
 describe('live update', () => {
 
