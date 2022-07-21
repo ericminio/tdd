@@ -1,11 +1,11 @@
 const { expect } = require('chai');
-const { instrumented, save } = require('./support/coverage');
+const { instrumented, savePartialCoverage } = require('./support/coverage');
 const { coverage, formatTime} = instrumented({ sut: 'formatTime', file:'./instrumented/format-time.js' });
 
 describe('format time', () => {
 
     after(() => {
-        save(coverage);
+        savePartialCoverage(coverage());
     });
 
     it('keeps seconds as is', () => {

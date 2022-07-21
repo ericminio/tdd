@@ -8,23 +8,14 @@ const instrumented = (options) => {
     return (new Function(`${code} \n return {coverage:${instrumentor}, ${options.sut}};`))();
 };
 
-const save = (coverage) => {
-    let actualCoverage = coverage();
+const savePartialCoverage = (coverage) => {
     let data = {};
-    data[actualCoverage.path] = actualCoverage;
-    
-    writeFile(outputFileName(actualCoverage.path), data);
+    data[coverage.path] = coverage;
+    saveCoverage(data);
 };
 
-const saveGlobalCoverage = (data) => {
-    writeFile(`.nyc_output/coverage-${Date.now()}.json`, data);
+const saveCoverage = (coverage) => {
+    writeFile(`.nyc_output/coverage-${Date.now()}.json`, coverage);
 };
 
-const outputFileName = (file) => {
-    let name = file.substring(1+file.lastIndexOf('/'));
-    name = name.substring(0, name.indexOf('.'));
-
-    return `.nyc_output/${name}-${Date.now()}.json`;
-};
-
-module.exports = { instrumented, save, saveGlobalCoverage };
+module.exports = { instrumented, saveCoverage, savePartialCoverage };

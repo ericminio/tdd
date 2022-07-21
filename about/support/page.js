@@ -1,5 +1,5 @@
 const { JSDOM } = require('jsdom');
-const { saveGlobalCoverage } = require('./coverage');
+const { saveCoverage } = require('./coverage');
 
 const open = (done, query) => {
     let url = `http://localhost:5001`;
@@ -21,7 +21,7 @@ const open = (done, query) => {
 };
 
 const close = (done) => {
-    saveGlobalCoverage(page.window.__coverage__);    
+    saveCoverage(page.window.__coverage__);    
     done();
 };
 
