@@ -1,5 +1,6 @@
 const { expect } = require('chai');
-const code = require('fs').readFileSync('./instrumented/format-time.js').toString();
+const { readFile } = require('./support/files');
+const code = readFile('./instrumented/format-time.js');
 const instrumentorName = code.substring(code.indexOf('cov_'), code.indexOf('(')).trim();
 const {instrumentor, formatTime} = (new Function(`${code} \n return {instrumentor:${instrumentorName}, formatTime};`))();
 

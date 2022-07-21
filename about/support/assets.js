@@ -1,6 +1,6 @@
-const fs = require('fs');
+const { readFile } = require('./files');
 const readAsset = (file) => {
-    return fs.readFileSync(`./instrumented/${file}`).toString() 
+    return readFile(`./instrumented/${file}`);
 }
 const assets = {
     '/': { 
