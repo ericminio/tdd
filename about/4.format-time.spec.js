@@ -5,7 +5,7 @@ const { coverage, formatTime} = instrumented({ sut: 'formatTime', file:'./instru
 describe('format time', () => {
 
     after(() => {
-        save(coverage, `.nyc_output/formatTime-${Date.now()}.json`);
+        save(coverage);
     });
 
     it('keeps seconds as is', () => {

@@ -8,11 +8,19 @@ const instrumented = (options) => {
     return (new Function(`${code} \n return {coverage:${instrumentor}, ${options.sut}};`))();
 };
 
-const save = (coverage, file) => {
+const save = (coverage) => {
     let actualCoverage = coverage();
     let data = {};
     data[actualCoverage.path] = actualCoverage;
-    writeFile(file, data);
+    
+    writeFile(outputFileName(actualCoverage.path), data);
+}
+
+const outputFileName = (file) => {
+    let name = file.substring(1+file.lastIndexOf('/'));
+    name = name.substring(0, name.indexOf('.'));
+    
+    return `.nyc_output/${name}-${Date.now()}.json`;
 }
 
 module.exports = { instrumented, save };
