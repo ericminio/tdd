@@ -1,4 +1,5 @@
 const { JSDOM } = require('jsdom');
+const { saveGlobalCoverage } = require('./coverage');
 
 const open = (done, query) => {
     let url = `http://localhost:5001`;
@@ -20,8 +21,7 @@ const open = (done, query) => {
 };
 
 const close = (done) => {
-    let coverage = page.window.__coverage__;
-    require('fs').writeFileSync('.nyc_output/coverage.json', JSON.stringify(coverage));
+    saveGlobalCoverage(page.window.__coverage__);    
     done();
 };
 

@@ -14,13 +14,17 @@ const save = (coverage) => {
     data[actualCoverage.path] = actualCoverage;
     
     writeFile(outputFileName(actualCoverage.path), data);
-}
+};
+
+const saveGlobalCoverage = (data) => {
+    writeFile(`.nyc_output/coverage-${Date.now()}.json`, data);
+};
 
 const outputFileName = (file) => {
     let name = file.substring(1+file.lastIndexOf('/'));
     name = name.substring(0, name.indexOf('.'));
-    
-    return `.nyc_output/${name}-${Date.now()}.json`;
-}
 
-module.exports = { instrumented, save };
+    return `.nyc_output/${name}-${Date.now()}.json`;
+};
+
+module.exports = { instrumented, save, saveGlobalCoverage };

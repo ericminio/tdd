@@ -1,10 +1,10 @@
 [![CI](https://github.com/ericminio/tdd/actions/workflows/ci.yml/badge.svg)](https://github.com/ericminio/tdd/actions/workflows/ci.yml)
 
 ```
-Statements   : 95.65% ( 44/46 )
-Branches     : 62.5% ( 5/8 )
-Functions    : 91.66% ( 11/12 )
-Lines        : 95.65% ( 44/46 )
+Statements   : 100% ( 46/46 )
+Branches     : 100% ( 8/8 )
+Functions    : 100% ( 12/12 )
+Lines        : 100% ( 46/46 )
 ```
 
 
