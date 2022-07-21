@@ -4,4 +4,8 @@ const readFile = (file) => {
     return fs.readFileSync(file).toString();
 };
 
-module.exports = { readFile }
+const writeFile = (file, content) => {
+    fs.writeFileSync(file, JSON.stringify(content));
+};
+
+module.exports = { readFile, writeFile }

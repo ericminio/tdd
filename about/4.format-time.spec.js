@@ -1,17 +1,11 @@
 const { expect } = require('chai');
-const { readFile } = require('./support/files');
-const code = readFile('./instrumented/format-time.js');
-const instrumentorName = code.substring(code.indexOf('cov_'), code.indexOf('(')).trim();
-const {instrumentor, formatTime} = (new Function(`${code} \n return {instrumentor:${instrumentorName}, formatTime};`))();
+const { instrumented, save } = require('./support/coverage');
+const { coverage, formatTime} = instrumented({ sut: 'formatTime', file:'./instrumented/format-time.js' });
 
 describe('format time', () => {
 
     after(() => {
-        let coverage = instrumentor();
-        let data = {};
-        data[coverage.path] = coverage;
-        let fileName = `.nyc_output/${instrumentorName}-${Date.now()}.json`;
-        require('fs').writeFileSync(fileName, JSON.stringify(data));
+        save(coverage, `.nyc_output/formatTime-${Date.now()}.json`);
     });
 
     it('keeps seconds as is', () => {
