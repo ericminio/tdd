@@ -1,5 +1,5 @@
 const { assets } = require('./assets');
-const { Server } = require('./server');
+const { Server } = require('./support/server');
 
 const servingAssets = (request, response) => {
     if (request.url.startsWith('/index.html?')) {

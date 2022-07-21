@@ -1,5 +1,5 @@
 const { JSDOM } = require('jsdom');
-const { saveCoverage } = require('./coverage');
+const { saveCoverage } = require('./support/coverage');
 
 const open = (done, query) => {
     let url = `http://localhost:5001`;

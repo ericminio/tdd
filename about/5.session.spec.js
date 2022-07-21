@@ -1,6 +1,6 @@
 const { expect } = require('chai');
-const { server } = require('./support/serving-assets');
-const { page } = require('./support/page');
+const { server } = require('./serving-assets');
+const { page } = require('./page');
 
 describe('session', () => {
 

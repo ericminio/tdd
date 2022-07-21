@@ -1,4 +1,4 @@
-const { readFile } = require('./files');
+const { readFile } = require('./support/files');
 const readAsset = (file) => {
     return readFile(`./instrumented/${file}`);
 }
