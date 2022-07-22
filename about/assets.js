@@ -19,9 +19,9 @@ const assets = {
         contentType: 'application/javascript', 
         content: readAsset('event-bus.js')
     },
-    '/hints.js': { 
+    '/hints-renderer.js': { 
         contentType: 'application/javascript', 
-        content: readAsset('hints.js')
+        content: readAsset('hints-renderer.js')
     },
     '/main.js': { 
         contentType: 'application/javascript', 
