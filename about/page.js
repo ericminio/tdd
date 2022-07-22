@@ -27,4 +27,12 @@ const close = (done) => {
 
 const page = { open, close };
 
+page.find = (selector) => {
+    return page.document.querySelector(selector);
+};
+page.click = (selector) => {
+    let element = page.find(selector);
+    element.click();
+};
+
 module.exports = { page };

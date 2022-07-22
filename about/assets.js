@@ -15,21 +15,17 @@ const assets = {
         contentType: 'application/javascript', 
         content: readAsset('poh.js')
     },
-    '/format-time.js': { 
+    '/event-bus.js': { 
         contentType: 'application/javascript', 
-        content: readAsset('format-time.js')
+        content: readAsset('event-bus.js')
     },
-    '/render-times.js': { 
+    '/hints.js': { 
         contentType: 'application/javascript', 
-        content: readAsset('render-times.js')
+        content: readAsset('hints.js')
     },
-    '/render-hints.js': { 
+    '/main.js': { 
         contentType: 'application/javascript', 
-        content: readAsset('render-hints.js')
+        content: readAsset('main.js')
     },
-    '/model.js': { 
-        contentType: 'application/javascript', 
-        content: readAsset('model.js')
-    }
 };
 module.exports = { assets };

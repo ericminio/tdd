@@ -2,103 +2,28 @@
 <html lang="en">
 
 <head>
+    <title>TDD</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="app.css">  
     <script src="poh.js"></script>
-    <script src="format-time.js"></script>
-    <script src="render-times.js"></script>
-    <script src="render-hints.js"></script>
-    <script src="model.js"></script>
-    <script>
-        var started = false;
-        var delay = 1000;
-
-        var tick = () => {
-            updateTimes(times, counting);
-            renderTimes(times, document);
-            if (started) { setTimeout(tick, delay); }
-        }
-        
-        var start = () => {
-            if (!started) {
-                setTimeout(tick, delay);
-                started = true;
-            }
-        }
-        var stop = () => {
-            started = false;
-        }   
-    </script>
+    <script src="event-bus.js"></script>
+    <script src="hints.js"></script> 
 </head>
 
 <body>
-    <input type="radio" name="step" id="test" value="test" checked onclick="displayHints('test', document, 'hints'); nowCounting('test');">
+    <input type="radio" name="step" id="test" value="test" >
     <label for="test">test</label>
 
-    <input type="radio" name="step" id="code" value="code" onclick="displayHints('code', document, 'hints'); nowCounting('code');">
+    <input type="radio" name="step" id="code" value="code" >
     <label for="code">code</label>
 
-    <input type="radio" name="step" id="refactor" value="refactor" onclick="displayHints('refactor', document, 'hints'); nowCounting('refactor');">
+    <input type="radio" name="step" id="refactor" value="refactor" >
     <label for="refactor">refactor</label>
 
-    <table>
-        <tr>
-            <td style="vertical-align: top; width:70%;">
-                <div class="hints" id="hints"></div>
-            </td>
-            <td style="text-align: center; vertical-align: top; width:30%;">
-                <div id="pie" , class="pie"></div>
-                <div>
-                    <button id="start" onclick="start();">start</button>
-                    <button id="stop" onclick="stop();">stop</button>
-                </div>
-                <div>
-                    <a id="save-link" href="">save</a>
-                </div>
-                <div id="times">
-                    <br />
-                    <table>
-                        <tr>
-                            <th></th>
-                            <th class="number">%</th>
-                        </tr>
-                        <tr>
-                            <th style="color:var(--color-test)">test</th>
-                            <td id="percentage-test" class="number"></td>
-                        </tr>
-                        <tr>
-                            <th style="color:var(--color-code)">code</th>
-                            <td id="percentage-code" class="number"></td>
-                        </tr>
-                        <tr>
-                            <th style="color:var(--color-refactor)">refactor</th>
-                            <td id="percentage-refactor" class="number"></td>
-                        </tr>
-                    </table>
-                    <table style="margin-top: 15px;">
-                        <tr>
-                            <th>total</th>
-                            <td id="total-time" class="number"></td>
-                        </tr>
-                        <tr>
-                            <th>step</th>
-                            <td id="step-time" class="number"></td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div id="hints"></div>
 
-    <script>
-        document.getElementById('test').click();
-        const searchParams = new URLSearchParams(window.location.search);
-        if (searchParams.has("test")) { times.test = parseInt(searchParams.get('test')); }
-        if (searchParams.has("code")) { times.code = parseInt(searchParams.get('code')); }
-        if (searchParams.has("refactor")) { times.refactor = parseInt(searchParams.get('refactor')); }
-        renderTimes(times, document);
-    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>
