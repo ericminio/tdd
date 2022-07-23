@@ -1,3 +1,20 @@
 :root {
     font-family: Helvetica, sans-serif;
+
+    --color-test: rgb(216, 30, 30);
+    --color-code: rgb(0, 165, 0);
+    --color-refactor: rgb(0, 103, 205);
+}
+
+.step {
+    font-weight: bold;
+}
+.test {
+    color:var(--color-test);
+}
+.code {
+    color:var(--color-code);
+}
+.refactor {
+    color:var(--color-refactor);
 }
