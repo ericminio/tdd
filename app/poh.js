@@ -45,6 +45,7 @@ var procedures = {
         "time check",
         "revert?",
         "commit?",
+        "rebase?",
         "glad?",
         "afraid?",
         "backlog update?"
